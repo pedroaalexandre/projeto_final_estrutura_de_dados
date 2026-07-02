@@ -119,9 +119,3 @@ O README deve conter a tabela de resultados reais obtidos com o benchmark. Abaix
 2. Trie vs varredura linear: com poucas disciplinas a diferença pode ser pequena. Com 10.000 disciplinas, a Trie escala melhor porque evita a varredura completa do conjunto.
 3. Rate Limiter: o custo deve ser O(1) amortizado. Se o tempo ficar elevado, o uso de `synchronized` no deque pode ser o motivo.
 4. Variância: erro ± > 10% indica instabilidade de benchmark. Pode ser causado por GC, JIT não estabilizado ou carga do sistema.
-
-## Notas finais
-
-- A aplicação foi projetada para funcionar em ambiente local com Redis e RabbitMQ via `docker-compose`.
-- O módulo de testes foi configurado para ser executado sem dependências externas ativas.
-- Depois de preencher a tabela JMH, inclua as análises reais dos resultados.
