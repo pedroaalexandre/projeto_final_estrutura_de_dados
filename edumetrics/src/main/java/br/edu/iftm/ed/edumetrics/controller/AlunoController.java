@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/alunos")
@@ -25,6 +26,11 @@ public class AlunoController {
         AlunoDTO salvo = alunoService.salvar(aluno);
         URI location = URI.create("/api/alunos/" + salvo.id());
         return ResponseEntity.created(location).body(salvo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AlunoDTO>> listar() {
+        return ResponseEntity.ok(alunoService.buscarTodos());
     }
 
     @GetMapping("/{id}")

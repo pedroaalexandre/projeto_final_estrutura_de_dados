@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -75,6 +76,10 @@ public class AlunoService {
     @CacheEvict(value = "alunos", allEntries = true)
     public void limparCache() {
         cacheMatricula.clear();
+    }
+
+    public List<AlunoDTO> buscarTodos() {
+        return repository.findAll().stream().map(this::toDTO).toList();
     }
 
     public Map<String, Object> cacheStats() {

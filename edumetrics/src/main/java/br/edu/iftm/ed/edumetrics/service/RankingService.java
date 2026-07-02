@@ -24,6 +24,9 @@ public class RankingService {
 
         PriorityQueue<RankingItemDTO> heap = new PriorityQueue<>(Comparator.comparingDouble(RankingItemDTO::mediaGeral));
         for (RankingItemSummaryDTO item : desempenhoRepository.findMediasPorAluno()) {
+            if (item.mediaGeral() == null) {
+                continue;
+            }
             heap.offer(new RankingItemDTO(0, item.nome(), item.matricula(), item.mediaGeral(), item.disciplinasConcluidas()));
             if (heap.size() > k) {
                 heap.poll();
