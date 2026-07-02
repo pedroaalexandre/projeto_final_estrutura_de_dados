@@ -1,0 +1,463 @@
+{
+  "info": {
+    "name": "EduMetrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0",
+    "description": "Coleção Postman para testar os endpoints principais do EduMetrics API descritos no tópico 6."
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "createdAlunoId",
+      "value": ""
+    },
+    {
+      "key": "createdMatricula",
+      "value": ""
+    },
+    {
+      "key": "createdRelatorioCorrelationId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Aluno",
+      "item": [
+        {
+          "name": "Cadastrar aluno",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/alunos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricula\": \"202600001\",\n  \"nome\": \"Aluno Teste\",\n  \"email\": \"aluno.teste@iftm.edu.br\",\n  \"curso\": \"TSI\",\n  \"periodo\": 3\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "if (json && json.id) {",
+                  "    pm.collectionVariables.set('createdAlunoId', json.id);",
+                  "}",
+                  "if (json && json.matricula) {",
+                  "    pm.collectionVariables.set('createdMatricula', json.matricula);",
+                  "}",
+                  "pm.test('Resposta deve conter aluno', function () {",
+                  "    pm.expect(json).to.have.property('id');",
+                  "    pm.expect(json).to.have.property('matricula');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar aluno por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/alunos/{{createdAlunoId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos", "{{createdAlunoId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna aluno correto', function () {",
+                  "    pm.expect(json).to.have.property('id');",
+                  "    pm.expect(json.id.toString()).to.eql(pm.collectionVariables.get('createdAlunoId').toString());",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar aluno por matrícula",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/alunos/matricula/{{createdMatricula}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos", "matricula", "{{createdMatricula}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna aluno por matrícula', function () {",
+                  "    pm.expect(json).to.have.property('matricula');",
+                  "    pm.expect(json.matricula).to.eql(pm.collectionVariables.get('createdMatricula'));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Atualizar aluno",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/alunos/{{createdAlunoId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos", "{{createdAlunoId}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": {{createdAlunoId}},\n  \"matricula\": \"202600001\",\n  \"nome\": \"Aluno Teste Atualizado\",\n  \"email\": \"aluno.teste@iftm.edu.br\",\n  \"curso\": \"TSI\",\n  \"periodo\": 4\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Atualização aplicada', function () {",
+                  "    pm.expect(json.nome).to.eql('Aluno Teste Atualizado');",
+                  "    pm.expect(json.periodo).to.eql(4);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remover aluno",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/alunos/{{createdAlunoId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos", "{{createdAlunoId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disciplina",
+      "item": [
+        {
+          "name": "Autocompletar disciplina",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/disciplinas/autocompletar?q=Alg",
+              "host": ["{{base_url}}"],
+              "path": ["api", "disciplinas", "autocompletar"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Alg"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna lista de sugestões', function () {",
+                  "    pm.expect(json).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Desempenho",
+      "item": [
+        {
+          "name": "Registrar desempenho",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/desempenhos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "desempenhos"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alunoId\": {{createdAlunoId}},\n  \"disciplina\": \"Algoritmos\",\n  \"nota1\": 8.5,\n  \"nota2\": 7.0,\n  \"semestre\": \"2026/1\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar desempenho por aluno",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/alunos/{{createdAlunoId}}/desempenho",
+              "host": ["{{base_url}}"],
+              "path": ["api", "alunos", "{{createdAlunoId}}", "desempenho"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna lista de desempenhos', function () {",
+                  "    pm.expect(json).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ranking",
+      "item": [
+        {
+          "name": "Obter ranking top 5",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/ranking?top=5",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ranking"],
+              "query": [
+                {
+                  "key": "top",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna lista de ranking', function () {",
+                  "    pm.expect(json).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Relatórios",
+      "item": [
+        {
+          "name": "Solicitar relatório",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/relatorios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "relatorios"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alunoId\": {{createdAlunoId}},\n  \"tipo\": \"BOLETIM\",\n  \"semestre\": \"2026/1\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 202', function () {",
+                  "    pm.response.to.have.status(202);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "if (json && json.correlationId) {",
+                  "    pm.collectionVariables.set('createdRelatorioCorrelationId', json.correlationId);",
+                  "}",
+                  "pm.test('Retorna correlationId', function () {",
+                  "    pm.expect(json).to.have.property('correlationId');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Cache stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/admin/cache/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "cache", "stats"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Retorna hits e misses', function () {",
+                  "    pm.expect(json).to.have.property('hits');",
+                  "    pm.expect(json).to.have.property('misses');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Limpar cache",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/admin/cache",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "cache"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/admin/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "health"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const json = pm.response.json();",
+                  "pm.test('Health contém status', function () {",
+                  "    pm.expect(json).to.have.property('status');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

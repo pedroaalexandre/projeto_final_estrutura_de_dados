@@ -1,0 +1,485 @@
+{
+	"id": "b5d1aa2d-4749-46eb-bb80-25158aea9321",
+	"name": "EduMetrics API",
+	"timestamp": "2026-07-02T03:33:02.093Z",
+	"collection_id": "43635256-c45aeaa9-d509-4ce3-bc6e-bf896c839174",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 6,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-07-02T03:33:00.356Z",
+	"totalFail": 17,
+	"results": [
+		{
+			"id": "a18a61b4-a313-4286-b3ef-7c497de2cbbb",
+			"name": "Cadastrar aluno",
+			"url": "http://localhost:8080/api/alunos",
+			"time": 372,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status 201": false,
+				"Resposta deve conter aluno": false
+			},
+			"testPassFailCounts": {
+				"Status 201": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Resposta deve conter aluno": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				372
+			],
+			"allTests": [
+				{
+					"Status 201": false,
+					"Resposta deve conter aluno": false
+				}
+			]
+		},
+		{
+			"id": "49c0391f-496a-416e-8f65-df33c44dae4a",
+			"name": "Buscar aluno por ID",
+			"url": "http://localhost:8080/api/alunos/",
+			"time": 11,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 200": false,
+				"Retorna aluno correto": false
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Retorna aluno correto": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status 200": false,
+					"Retorna aluno correto": false
+				}
+			]
+		},
+		{
+			"id": "968d14e4-1a2c-44e2-8a85-ffd43b4f88cb",
+			"name": "Buscar aluno por matrícula",
+			"url": "http://localhost:8080/api/alunos/matricula/",
+			"time": 7,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 200": false,
+				"Retorna aluno por matrícula": false
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Retorna aluno por matrícula": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status 200": false,
+					"Retorna aluno por matrícula": false
+				}
+			]
+		},
+		{
+			"id": "913e174b-0f84-44a3-b170-6a231fb76b96",
+			"name": "Atualizar aluno",
+			"url": "http://localhost:8080/api/alunos/",
+			"time": 5,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 200": false,
+				"Atualização aplicada": false
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Atualização aplicada": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status 200": false,
+					"Atualização aplicada": false
+				}
+			]
+		},
+		{
+			"id": "90e52634-054e-4b50-aa87-af9657521510",
+			"name": "Remover aluno",
+			"url": "http://localhost:8080/api/alunos/",
+			"time": 6,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 204": false
+			},
+			"testPassFailCounts": {
+				"Status 204": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status 204": false
+				}
+			]
+		},
+		{
+			"id": "18cde315-afea-4a56-aa21-c90ede09486b",
+			"name": "Autocompletar disciplina",
+			"url": "http://localhost:8080/api/disciplinas/autocompletar?q=Alg",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status 200": true,
+				"Retorna lista de sugestões": true
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorna lista de sugestões": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status 200": true,
+					"Retorna lista de sugestões": true
+				}
+			]
+		},
+		{
+			"id": "684c334a-9d59-4331-9322-e38227b557e7",
+			"name": "Registrar desempenho",
+			"url": "http://localhost:8080/api/desempenhos",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status 201": false
+			},
+			"testPassFailCounts": {
+				"Status 201": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status 201": false
+				}
+			]
+		},
+		{
+			"id": "da87b712-18e9-47c0-8dea-87478ec36058",
+			"name": "Buscar desempenho por aluno",
+			"url": "http://localhost:8080/api/alunos//desempenho",
+			"time": 7,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 200": false,
+				"Retorna lista de desempenhos": false
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Retorna lista de desempenhos": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status 200": false,
+					"Retorna lista de desempenhos": false
+				}
+			]
+		},
+		{
+			"id": "65c812f4-d5c4-45c2-9034-d4ba97abafa4",
+			"name": "Obter ranking top 5",
+			"url": "http://localhost:8080/api/ranking?top=5",
+			"time": 406,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status 200": false,
+				"Retorna lista de ranking": false
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Retorna lista de ranking": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				406
+			],
+			"allTests": [
+				{
+					"Status 200": false,
+					"Retorna lista de ranking": false
+				}
+			]
+		},
+		{
+			"id": "b6ed9b03-c781-4bf6-8591-0e4581ae9797",
+			"name": "Solicitar relatório",
+			"url": "http://localhost:8080/api/relatorios",
+			"time": 59,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status 202": false,
+				"Retorna correlationId": false
+			},
+			"testPassFailCounts": {
+				"Status 202": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Retorna correlationId": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				59
+			],
+			"allTests": [
+				{
+					"Status 202": false,
+					"Retorna correlationId": false
+				}
+			]
+		},
+		{
+			"id": "0d876e2a-f4d3-43e3-af96-c1e5fbbed759",
+			"name": "Cache stats",
+			"url": "http://localhost:8080/api/admin/cache/stats",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status 200": true,
+				"Retorna hits e misses": true
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorna hits e misses": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				27
+			],
+			"allTests": [
+				{
+					"Status 200": true,
+					"Retorna hits e misses": true
+				}
+			]
+		},
+		{
+			"id": "befa0946-7a1a-4c83-8a70-0e1e0fef9976",
+			"name": "Limpar cache",
+			"url": "http://localhost:8080/api/admin/cache",
+			"time": 24,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status 204": false
+			},
+			"testPassFailCounts": {
+				"Status 204": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status 204": false
+				}
+			]
+		},
+		{
+			"id": "dc7fc41c-e03a-4006-b0d3-8b88b23fd3f4",
+			"name": "Health check",
+			"url": "http://localhost:8080/api/admin/health",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status 200": true,
+				"Health contém status": true
+			},
+			"testPassFailCounts": {
+				"Status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Health contém status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status 200": true,
+					"Health contém status": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 951,
+	"collection": {
+		"requests": [
+			{
+				"id": "a18a61b4-a313-4286-b3ef-7c497de2cbbb",
+				"method": "POST"
+			},
+			{
+				"id": "49c0391f-496a-416e-8f65-df33c44dae4a",
+				"method": "GET"
+			},
+			{
+				"id": "968d14e4-1a2c-44e2-8a85-ffd43b4f88cb",
+				"method": "GET"
+			},
+			{
+				"id": "913e174b-0f84-44a3-b170-6a231fb76b96",
+				"method": "PUT"
+			},
+			{
+				"id": "90e52634-054e-4b50-aa87-af9657521510",
+				"method": "DELETE"
+			},
+			{
+				"id": "18cde315-afea-4a56-aa21-c90ede09486b",
+				"method": "GET"
+			},
+			{
+				"id": "684c334a-9d59-4331-9322-e38227b557e7",
+				"method": "POST"
+			},
+			{
+				"id": "da87b712-18e9-47c0-8dea-87478ec36058",
+				"method": "GET"
+			},
+			{
+				"id": "65c812f4-d5c4-45c2-9034-d4ba97abafa4",
+				"method": "GET"
+			},
+			{
+				"id": "b6ed9b03-c781-4bf6-8591-0e4581ae9797",
+				"method": "POST"
+			},
+			{
+				"id": "0d876e2a-f4d3-43e3-af96-c1e5fbbed759",
+				"method": "GET"
+			},
+			{
+				"id": "befa0946-7a1a-4c83-8a70-0e1e0fef9976",
+				"method": "DELETE"
+			},
+			{
+				"id": "dc7fc41c-e03a-4006-b0d3-8b88b23fd3f4",
+				"method": "GET"
+			}
+		]
+	}
+}
